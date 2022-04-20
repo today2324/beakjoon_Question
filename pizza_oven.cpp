@@ -3,7 +3,7 @@
 
 #define HOUR 60
 #define TEN 10
-#define ONE 1
+#define MINUTE 1
 using namespace std;
 
 typedef struct Oventime {
@@ -28,28 +28,40 @@ int main()
 	}
 
 	for (size_t i = 0; i < testcase; i++)
-	{	
+	{
 		if (setTimeN[i] > HOUR)
 		{
-			for (size_t i = 0; i < setTimeN[i]; i++)
+			for (size_t i = 0; HOUR <= setTimeN[i]; i++)
 			{
 				ovenTime.AddHour++;
-			}
-			if (setTimeN[i] - (HOUR * ovenTime.AddHour))
-			{
-				
+				setTimeN[i] -= HOUR;
 			}
 		}
-		else if (5 < setTimeN[i] < 40)
+		if (35 < setTimeN[i])
 		{
-			ovenTime.AddTen++;
-		}
-		if (setTimeN[i] < 10)
-		{
-			for (size_t i = 0; i < (10 - setTimeN[i]); i++)
+			ovenTime.AddHour++;
+			if ()
 			{
-				ovenTime.MinOne++;
+
 			}
+			
+		}
+		if (5 < setTimeN[i] < 36)
+		{
+			for (size_t i = 0; TEN > setTimeN[i]; i++)
+			{
+				ovenTime.AddTen++;
+				setTimeN[i] -= TEN;
+			}
+			if (0 < setTimeN[i] < TEN)
+			{
+				ovenTime.AddTen++;
+				setTimeN[i] += TEN;
+			}
+		}
+		else
+		{
+
 		}
 	}
 }
