@@ -1,13 +1,17 @@
 #include<iostream>
 #include<vector>
+
+#define HOUR 60
+#define TEN 10
+#define ONE 1
 using namespace std;
 
 typedef struct Oventime {
-	int AddHour;
-	int AddTen;
-	int MinTen;
-	int AddOne;
-	int MinOne;
+	int AddHour = 0;
+	int AddTen = 0;
+	int MinTen = 0;
+	int AddOne = 0;
+	int MinOne = 0;
 }Oventime;
 
 int main()
@@ -24,12 +28,16 @@ int main()
 	}
 
 	for (size_t i = 0; i < testcase; i++)
-	{
-		if (setTimeN[i] > 60)
+	{	
+		if (setTimeN[i] > HOUR)
 		{
 			for (size_t i = 0; i < setTimeN[i]; i++)
 			{
 				ovenTime.AddHour++;
+			}
+			if (setTimeN[i] - (HOUR * ovenTime.AddHour))
+			{
+				
 			}
 		}
 		else if (5 < setTimeN[i] < 40)
@@ -43,10 +51,5 @@ int main()
 				ovenTime.MinOne++;
 			}
 		}
-		else if (setTimeN[i] > 10)
-		{
-
-		}
 	}
-
 }
