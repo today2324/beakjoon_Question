@@ -4,6 +4,7 @@
 #define HOUR 60
 #define TEN 10
 #define MINUTE 1
+
 using namespace std;
 
 typedef struct Oventime {
@@ -21,15 +22,23 @@ int main()
 	int testcase;
 	int temp;
 	cin >> testcase;
+
 	for (size_t i = 0; i < testcase; i++)
 	{
 		cin >> temp;
 		setTimeN.push_back(temp);
 	}
 
+	//for (size_t i = 0; i < testcase; i++)
+	//{
+	//	cout << setTimeN[i] << endl;
+	//
+	//}
+	//cout << endl;
+
 	for (size_t i = 0; i < testcase; i++)
 	{
-		if (setTimeN[i] > HOUR)
+		if (HOUR < setTimeN[i])
 		{
 			for (size_t j = 0; HOUR <= setTimeN[i]; j++)
 			{
@@ -37,38 +46,55 @@ int main()
 				setTimeN[i] -= HOUR;
 			}
 		}
+		
 		if (35 < setTimeN[i])
 		{
 			ovenTime.AddHour++;
-			ovenTime.MinTen++;
-			setTimeN[i] = -TEN;
+
+			if (10 < (HOUR - setTimeN[i]))
+			{
+				ovenTime.MinTen++;
+			}
+
+			while((ovenTime.MinOne + ovenTime.MinTen * TEN) == (HOUR - setTimeN[i]))
+			{
+				ovenTime.MinOne++;
+			}
+			setTimeN[i] = 0;
 		}
-		if (5 < setTimeN[i] < 36)
+		
+		if (5 < setTimeN[i] && setTimeN[i] < 36)
 		{
 			for (size_t j = 0; TEN < setTimeN[i]; j++)
 			{
 				ovenTime.AddTen++;
 				setTimeN[i] -= TEN;
 			}
+
 			if (5 < setTimeN[i] <= TEN)
 			{
 				ovenTime.AddTen++;
-				setTimeN[i] += TEN;
-			}
-			while (setTimeN[i])
-			{
-				ovenTime.MinOne++;
-				setTimeN[i]--;
+
+				while (ovenTime.MinOne == (TEN - setTimeN[i]))
+				{
+					ovenTime.MinOne++;
+				}
 			}
 		}
 
-		if (setTimeN[i])
+		while (setTimeN[i])
 		{
-			cout << ovenTime.AddHour << " ";
-			cout << ovenTime.AddTen << " ";
-			cout << ovenTime.MinTen << " ";
-			cout << ovenTime.AddOne << " ";
-			cout << ovenTime.MinOne << endl;
+			ovenTime.AddOne++;
+			setTimeN[i]--;
 		}
+
+		cout << ovenTime.AddHour << " ";
+		cout << ovenTime.AddTen << " ";
+		cout << ovenTime.MinTen << " ";
+		cout << ovenTime.AddOne << " ";
+		cout << ovenTime.MinOne << endl;
 	}
+	
+
 }
+
