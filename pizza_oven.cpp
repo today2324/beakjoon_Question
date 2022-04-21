@@ -21,12 +21,14 @@ int main()
 	vector<int> setTimeN;
 	int testcase;
 	int temp;
+	int testtemp;
 	cin >> testcase;
 
 	for (size_t i = 0; i < testcase; i++)
 	{
 		cin >> temp;
 		setTimeN.push_back(temp);
+		testtemp - setTimeN[i];
 	}
 
 	//for (size_t i = 0; i < testcase; i++)
@@ -82,6 +84,8 @@ int main()
 			}
 		}
 
+		cout << "test setTime =" << setTimeN[i] << endl;
+		cout << "addOne Number = " << ovenTime.AddOne << endl;
 		while (setTimeN[i])
 		{
 			ovenTime.AddOne++;
@@ -93,6 +97,12 @@ int main()
 		cout << ovenTime.MinTen << " ";
 		cout << ovenTime.AddOne << " ";
 		cout << ovenTime.MinOne << endl;
+
+		ovenTime.AddHour = 0;
+		ovenTime.AddTen = 0;
+		ovenTime.MinTen = 0;
+		ovenTime.AddOne = 0;
+		ovenTime.MinOne = 0;
 	}
 	
 
