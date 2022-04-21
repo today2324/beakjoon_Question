@@ -71,7 +71,7 @@ int main()
 				setTimeN[i] -= TEN;
 			}
 
-			if (5 < setTimeN[i] <= TEN)
+			if (5 < setTimeN[i] && setTimeN[i] <= TEN)
 			{
 				ovenTime.AddTen++;
 
