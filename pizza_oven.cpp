@@ -48,25 +48,32 @@ int main()
 				setTimeN[i] -= HOUR;
 			}
 		}
-		
+
 		if (35 < setTimeN[i])
 		{
 			ovenTime.AddHour++;
+			cout << "setTimeN[i]" << setTimeN[i] << endl;
 
-			if (10 < (HOUR - setTimeN[i]))
+			if (5 < (HOUR - setTimeN[i]))
 			{
 				ovenTime.MinTen++;
 			}
 
-			while((ovenTime.MinOne + ovenTime.MinTen * TEN) == (HOUR - setTimeN[i]))
+			while ((ovenTime.MinOne + ovenTime.MinTen * TEN) == (HOUR - setTimeN[i]))
+			{
+				ovenTime.MinOne++;
+			}
+
+			while ((HOUR - setTimeN[i]))
 			{
 				ovenTime.MinOne++;
 			}
 			setTimeN[i] = 0;
 		}
-		
+
 		if (5 < setTimeN[i] && setTimeN[i] < 36)
 		{
+			cout << "setTimeN[i] = " << setTimeN[i] << endl;
 			for (size_t j = 0; TEN < setTimeN[i]; j++)
 			{
 				ovenTime.AddTen++;
@@ -77,15 +84,14 @@ int main()
 			{
 				ovenTime.AddTen++;
 
-				while (ovenTime.MinOne == (TEN - setTimeN[i]))
+				while (ovenTime.MinOne != (TEN - setTimeN[i]))
 				{
 					ovenTime.MinOne++;
 				}
+				setTimeN[i] = 0;
 			}
 		}
 
-		cout << "test setTime =" << setTimeN[i] << endl;
-		cout << "addOne Number = " << ovenTime.AddOne << endl;
 		while (setTimeN[i])
 		{
 			ovenTime.AddOne++;
@@ -104,7 +110,7 @@ int main()
 		ovenTime.AddOne = 0;
 		ovenTime.MinOne = 0;
 	}
-	
+
 
 }
 
