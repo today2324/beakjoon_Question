@@ -1,4 +1,6 @@
 #include<iostream>
+#include<algorithm>
+#define COUNTRYNUM 4
 using namespace std;
 
 typedef struct country {
@@ -8,24 +10,31 @@ typedef struct country {
 	double ALose;
 }country;
 
+int factorial(int n)
+{
+	if (n == 1)
+	{
+		return 1;
+	}
+
+	return n * factorial(n - 1);
+}
+
 int main()
 {
 	country Country[4];
-	int testcase;
 	string teamA;
 	string teamB;
 
-	cin >> testcase;
-
-	for (size_t i = 0; i < testcase; i++)
+	for (size_t i = 0; i < COUNTRYNUM; i++)
 	{
 		cin >> Country[i].CountryName;
 	}
 
-	for (size_t i = 0; i < 6; i++)
+	for (size_t i = 0; i < factorial(COUNTRYNUM - 1); i++)
 	{
 		cin >> teamA >> teamB;
-		while(Country[i].CountryName != teamA)
+		while (Country[i].CountryName != teamA)
 		{
 			if (Country[i].CountryName == teamA)
 			{
@@ -40,7 +49,5 @@ int main()
 			i++;
 		}
 	}
-
-	cout << 
 
 }
