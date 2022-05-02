@@ -19,16 +19,15 @@ int main()
 {
 	Oventime ovenTime;
 	vector<int> setTimeN;
+	int TimeMinusN;
 	int testcase;
 	int temp;
-	int testtemp;
 	cin >> testcase;
 
 	for (size_t i = 0; i < testcase; i++)
 	{
 		cin >> temp;
 		setTimeN.push_back(temp);
-		testtemp - setTimeN[i];
 	}
 
 	//for (size_t i = 0; i < testcase; i++)
@@ -53,22 +52,23 @@ int main()
 		{
 			ovenTime.AddHour++;
 			cout << "setTimeN[i]" << setTimeN[i] << endl;
+			TimeMinusN = HOUR - setTimeN[i];
 
-			if (5 < (HOUR - setTimeN[i]))
+			if (5 < TimeMinusN)
 			{
 				ovenTime.MinTen++;
+				TimeMinusN -= TEN;
 			}
 
-			while ((ovenTime.MinOne + ovenTime.MinTen * TEN) == (HOUR - setTimeN[i]))
+			while (ovenTime.MinOne == TimeMinusN)
 			{
 				ovenTime.MinOne++;
 			}
-
-			while ((HOUR - setTimeN[i]))
+			
+			if (!TimeMinusN)
 			{
-				ovenTime.MinOne++;
+				setTimeN[i] = 0;
 			}
-			setTimeN[i] = 0;
 		}
 
 		if (5 < setTimeN[i] && setTimeN[i] < 36)
