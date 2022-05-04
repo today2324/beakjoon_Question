@@ -56,11 +56,17 @@ int main()
 			if (5 < TimeMinusN)
 			{
 				ovenTime.MinTen++;
+				if (TimeMinusN >= TEN)
+				{
+					TimeMinusN -= TEN;
+				}
 			}
+
 			while (ovenTime.MinOne == TimeMinusN)
 			{
 				ovenTime.MinOne++;
 			}
+			setTimeN[i] = TimeMinusN;
 
 			if (!TimeMinusN)
 			{
@@ -75,7 +81,7 @@ int main()
 				ovenTime.AddTen++;
 				setTimeN[i] -= TEN;
 			}
-	
+
 			if (5 < setTimeN[i] && setTimeN[i] <= TEN)
 			{
 				ovenTime.AddTen++;
@@ -109,4 +115,3 @@ int main()
 
 
 }
-
