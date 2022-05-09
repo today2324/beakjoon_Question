@@ -3,7 +3,11 @@
 using namespace std;
 
 #define HOUR 60
+#define UBD 170000
+void freespace()
+{
 
+}
 typedef struct Oventime {
 	int Addhour = 0;
 	int Addten = 0;
@@ -12,6 +16,31 @@ typedef struct Oventime {
 	int Minone = 0;
 }Oventime;
 
+Oventime Time;
+int calc(int time)
+{
+	while (10 < time)
+	{
+		time -= 10;
+		Time.Addten++;
+	}
+
+	while (5 < (time % 10))
+	{
+		Time.Addten++;
+		Time.Minone++;
+		time++;
+	}
+
+	while (0 < (time % 10) || (time % 10) < 6)
+	{
+		Time.Addone++;
+		time--;
+	}
+
+	return time;
+}
+
 int main()
 {
 	int testcase;
@@ -19,7 +48,6 @@ int main()
 	int timeTemp;
 	cin >> testcase;
 	vector<int> setTime;
-	Oventime Time;
 
 	for (size_t i = 0; i < testcase; i++)
 	{
@@ -29,36 +57,20 @@ int main()
 
 	for (size_t i = 0; i < testcase; i++)
 	{
-
 		while (60 < setTime[i])
 		{
-			Time.Addhour++;
 			setTime[i] -= HOUR;
+			Time.Addhour++;
 		}
 
 		if (35 < setTime[i])
-		{		
-			Time.Addhour++;
-			timeTemp = setTime[i];
-			if (setTime[i] < 56)
-			{
-				while (setTime[i] > 10)
-				{
-					setTime[i] -= 10;
-					Time.Addten++;
-				}
-			}
-
-			while (5 < (timeTemp % 10))
-			{
-				timeTemp++;
-				Time.Minone++;
-			}
-		}
-		else
 		{
-
+			Time.Addhour++;
+			timeTemp = HOUR - setTime[i];
+			
+			calc(timeTemp);
 		}
+		calc(setTime[i]);
 
 		cout << Time.Addhour << " ";
 		cout << Time.Addten << " ";
