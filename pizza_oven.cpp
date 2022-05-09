@@ -3,11 +3,7 @@
 using namespace std;
 
 #define HOUR 60
-#define UBD 170000
-void freespace()
-{
 
-}
 typedef struct Oventime {
 	int Addhour = 0;
 	int Addten = 0;
@@ -15,7 +11,6 @@ typedef struct Oventime {
 	int Addone = 0;
 	int Minone = 0;
 }Oventime;
-
 Oventime Time;
 int calc(int time)
 {
@@ -32,7 +27,7 @@ int calc(int time)
 		time++;
 	}
 
-	while (0 < (time % 10) || (time % 10) < 6)
+	while (0 < (time % 10) && (time % 10) < 6)
 	{
 		Time.Addone++;
 		time--;
@@ -65,12 +60,10 @@ int main()
 
 		if (35 < setTime[i])
 		{
-			Time.Addhour++;
-			timeTemp = HOUR - setTime[i];
-			
-			calc(timeTemp);
+			Time.Addhour++;			
+			timeTemp = calc(HOUR - setTime[i]);
 		}
-		calc(setTime[i]);
+		//calc(setTime[i]);
 
 		cout << Time.Addhour << " ";
 		cout << Time.Addten << " ";
