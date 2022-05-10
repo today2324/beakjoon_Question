@@ -12,19 +12,23 @@ typedef struct Oventime {
 	int Minone = 0;
 }Oventime;
 Oventime Time;
+bool needs = true;
 int calc(int time)
 {
-	while (10 < time)
+	while (time >= 10)
 	{
 		time -= 10;
 		Time.Addten++;
 	}
 
-	while (5 < (time % 10))
+	for (Time.Addten++; (time % 10) > 5; time++)
 	{
-		Time.Addten++;
 		Time.Minone++;
-		time++;
+		needs = false;
+	}
+	if (needs)
+	{
+		Time.Addten--;
 	}
 
 	while (0 < (time % 10) && (time % 10) < 6)
@@ -32,6 +36,7 @@ int calc(int time)
 		Time.Addone++;
 		time--;
 	}
+
 
 	return time;
 }
@@ -52,7 +57,7 @@ int main()
 
 	for (size_t i = 0; i < testcase; i++)
 	{
-		while (60 < setTime[i])
+		while (60 <= setTime[i])
 		{
 			setTime[i] -= HOUR;
 			Time.Addhour++;
@@ -60,10 +65,28 @@ int main()
 
 		if (35 < setTime[i])
 		{
-			Time.Addhour++;			
+			Time.Addhour++;
 			timeTemp = calc(HOUR - setTime[i]);
+			Time.Minten = Time.Addten;
+			Time.Addten = 0;
+			if (needs)
+			{
+				Time.Minone = Time.Addone;
+				Time.Addone = 0;
+			}
+			else
+			{
+				Time.Addone = Time.Minone;
+				Time.Minone = 0;
+			}
 		}
-		//calc(setTime[i]);
+		else
+		{
+			if (setTime[i])
+			{
+				calc(setTime[i]);
+			}
+		}
 
 		cout << Time.Addhour << " ";
 		cout << Time.Addten << " ";
@@ -76,5 +99,6 @@ int main()
 		Time.Minten = 0;
 		Time.Addone = 0;
 		Time.Minone = 0;
+		needs = true;
 	}
 }
