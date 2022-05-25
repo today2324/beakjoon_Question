@@ -1,52 +1,65 @@
 #include<iostream>
-#include<vector>
-#define INFECTION 1
-#define UNINFECTION 0
 using namespace std;
+#define NUMBER 1
+#define INFECTION 0
 
-int computerNum;
+int network[10000][2];
 int computer[100][2];
-int network[100][2];
-bool visited[100] = { false, };
-int temp;
-int Count = 0;
-void virus_search(int i)
+int visited[100] = { false, };
+int Count=0;
+void search(int n, int testcase)
 {
-	if (computer[i][0] != INFECTION && visited[i] == false)
+	if (computer[n][INFECTION] == false && visited[computer[n][NUMBER]] == false)
 	{
-		computer[i][0] = INFECTION;
+		computer[n][INFECTION] = true;
+		visited[computer[n][NUMBER]] = true;
 		Count++;
-		for (size_t j = 0; j < computerNum; j++)
+		for (size_t i = 0; i < testcase; i++)
 		{
-			if (network[j][0] == computer[i][1])
+			if (network[i][0] == computer[n][NUMBER])
 			{
-				virus_search(network[i][1]);
+				search(network[i][1], testcase);
 			}
-			if (network[j][1] == computer[i][1])
+			else if (network[i][1] == computer[n][NUMBER])
 			{
-				virus_search(network[j][0]);
+				search(network[i][0], testcase);
 			}
 		}
 	}
-	visited[i] = true;
-	
+	else
+	{
+		for (size_t i = 0; i < testcase; i++)
+		{
+			if (network[i][0] == computer[n][NUMBER])
+			{
+				if (visited[network[i][1]] == true) { continue; }
+				search(network[i][1], testcase);
+			}
+		}
+	}
 }
 
 int main()
 {
-	int temp;
+	int computerNum;
 	int testcase;
+
 	cin >> computerNum;
 	cin >> testcase;
+
 	for (size_t i = 0; i < computerNum; i++)
 	{
-		computer[i][1] = i + 1;
+		computer[i][NUMBER] = i;
+		computer[i][INFECTION] = false;
 	}
 
-	for (size_t i = 0; i < testcase; i++)
+	for (int i = 0; i < testcase; i++)
 	{
 		cin >> network[i][0] >> network[i][1];
+		network[i][0]--;
+		network[i][1]--;
 	}
-	virus_search(0);
-	cout << Count << endl;
+
+	search(0, testcase);
+	cout << Count-1 << endl;
 }
